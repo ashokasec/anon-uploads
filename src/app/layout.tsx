@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { inter } from "@/lib/fonts";
 import { creator, project } from "@/lib/config";
+import Provider from "@/components/provider";
 
 export const metadata: Metadata = {
   title: {
     template: `%s | ${project.name.sentenceCase}`,
     default: "Share Images Anonymously for 24 Hours",
   },
-  description:
-    `${project.name.sentenceCase} is an anonymous image-sharing platform where your uploads live for 24 hours, then vanish forever—no names, no logs, no traces.`,
+  description: `${project.name.sentenceCase} is an anonymous image-sharing platform where your uploads live for 24 hours, then vanish forever—no names, no logs, no traces.`,
   authors: [
     {
       name: "Shivam Gupta",
@@ -40,8 +40,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} antialiased`}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.className} antialiased`}>
+        <Provider>{children}</Provider>
+      </body>
     </html>
   );
 }

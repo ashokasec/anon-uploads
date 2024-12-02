@@ -13,7 +13,7 @@ const Footer = () => {
               style={space_grotesk.style}
               className="text-xl md:text-2xl font-extrabold"
             >
-             {project.name.smallCase}
+              {project.name.smallCase}
             </div>
 
             <p className="mt-2 text-sm text-muted-foreground">

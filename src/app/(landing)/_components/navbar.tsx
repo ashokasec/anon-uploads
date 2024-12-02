@@ -1,3 +1,4 @@
+import { DynamicThemeChanger } from "@/components/theme-changer/dynamic-theme-changer";
 import { Button } from "@/components/ui/button";
 import { project } from "@/lib/config";
 import { space_grotesk } from "@/lib/fonts";
@@ -8,18 +9,20 @@ const Navbar = () => {
   return (
     <header className="x-ash">
       <nav className="h-16 flex items-center justify-between leading-none">
-        <div
+        <Link
+          href="/"
           style={space_grotesk.style}
           className="text-xl md:text-2xl font-extrabold"
         >
           {project.name.smallCase}
-        </div>
-        <div className="flex items-center justify-between">
+        </Link>
+        <div className="flex items-center space-x-2">
           <Link href={project.links.github} target="_blank">
-            <Button variant={"outline"} className="font-semibold">
+            <Button variant={"link"} className="font-semibold">
               Contribute
             </Button>
           </Link>
+          <DynamicThemeChanger />
         </div>
       </nav>
     </header>
