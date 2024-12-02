@@ -64,7 +64,6 @@ export default function ImageUpload() {
 
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
-    console.log(selectedFile);
     if (selectedFile) {
       try {
         setError(null);
@@ -83,7 +82,6 @@ export default function ImageUpload() {
           setPreview(reader.result as string);
         };
         reader.readAsDataURL(compressedFile);
-        console.log(compressedFile);
       } catch (err: unknown) {
         if (err instanceof Error) {
           setError(err.message); // Safely access the message
@@ -93,7 +91,6 @@ export default function ImageUpload() {
         setPreview(null);
         setFile(null);
       }
-      
     } else {
       setPreview(null);
       setError(null);
@@ -131,6 +128,7 @@ export default function ImageUpload() {
         onChange={handleFileChange}
         className="hidden"
         id="imageUpload"
+        disabled={uploading}
       />
       <label
         htmlFor="imageUpload"

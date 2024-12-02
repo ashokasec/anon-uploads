@@ -19,7 +19,6 @@ export const getPutObjectPreSignedUrlAction = createServerAction()
     const { key, url } = await getPutObjectPreSignedUrlUseCase(
       input.contentType
     );
-    console.log({ filename: key, uploadUrl: url });
     return { filename: key, uploadUrl: url };
   });
 

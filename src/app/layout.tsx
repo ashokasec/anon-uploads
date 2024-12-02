@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { inter } from "@/lib/fonts";
+import { creator, project } from "@/lib/config";
 
 export const metadata: Metadata = {
   title: {
-    template: `%s | Anon Uploads`,
+    template: `%s | ${project.name.sentenceCase}`,
     default: "Share Images Anonymously for 24 Hours",
   },
   description:
-    "Anon Uploads is your playground for anonymous image sharing. Share anything, stay anonymous, and enjoy the rush for 24 hours!",
+    `${project.name.sentenceCase} is an anonymous image-sharing platform where your uploads live for 24 hours, then vanish forever—no names, no logs, no traces.`,
   authors: [
     {
       name: "Shivam Gupta",
-      url: "https://x.com/ashokasec",
+      url: creator.socials.twitter,
     },
     {
       name: "ashokasec",
