@@ -10,6 +10,20 @@ export const metadata: Metadata = {
     default: "Share Images Anonymously for 24 Hours",
   },
   description: `${project.name.sentenceCase} is an anonymous image-sharing platform where your uploads live for 24 hours, then vanish forever—no names, no logs, no traces.`,
+  openGraph: {
+    type: "website",
+    url: "https://anon-uploads.ashokasec.com",
+    title: `Share Images Anonymously for 24 Hours`,
+    description:
+      `${project.name.sentenceCase} is an anonymous image-sharing platform where your uploads live for 24 hours, then vanish forever—no names, no logs, no traces.`,
+    siteName: project.name.sentenceCase,
+    images: [
+      {
+        url: "https://d2gox21sq349ly.cloudfront.net/app/opengraph.png",
+        alt: `${project.name.sentenceCase} Opengraph`,
+      },
+    ],
+  },
   authors: [
     {
       name: "Shivam Gupta",
