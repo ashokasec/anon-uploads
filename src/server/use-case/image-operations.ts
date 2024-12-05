@@ -15,7 +15,7 @@ export const listAllImagesInLast24hrsUseCase = async () => {
     const images = await listAllObjectsByBucketNameUseCase(env.AWS_IMAGE_UPLOAD_BUCKET_NAME)
     if (!images) return []
     const desiredReturns = images.map((item) => {
-        const src = `https://${env.CLOUDFRONT_DOMAIN}/${item.Key}`
+        const src = `https://${env.NEXT_PUBLIC_CLOUDFRONT_DOMAIN}/${item.Key}`
         const lastModified = item.LastModified
         return { src, lastModified }
     })
