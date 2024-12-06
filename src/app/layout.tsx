@@ -14,8 +14,7 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://anon-uploads.ashokasec.com",
     title: `Share Images Anonymously for 24 Hours`,
-    description:
-      `${project.name.sentenceCase} is an anonymous image-sharing platform where your uploads live for 24 hours, then vanish forever—no names, no logs, no traces.`,
+    description: `${project.name.sentenceCase} is an anonymous image-sharing platform where your uploads live for 24 hours, then vanish forever—no names, no logs, no traces.`,
     siteName: project.name.sentenceCase,
     images: [
       {
