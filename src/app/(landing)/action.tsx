@@ -1,5 +1,6 @@
 "use server";
 
+import { auth } from "@/server/auth";
 import {
   getPutObjectPreSignedUrlUseCase,
   listAllImagesInLast24hrsUseCase,
@@ -16,6 +17,11 @@ export const getPutObjectPreSignedUrlAction = createServerAction()
     })
   )
   .handler(async ({ input }) => {
+    // TODO: Create a zsa procedure to authenticate a user.
+    const session = await auth();
+    if (!session) {
+      return;
+    }
     const { key, url } = await getPutObjectPreSignedUrlUseCase(
       input.contentType
     );

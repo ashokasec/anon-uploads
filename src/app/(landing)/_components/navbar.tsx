@@ -1,9 +1,9 @@
 import { DynamicThemeChanger } from "@/components/theme-changer/dynamic-theme-changer";
-import { Button } from "@/components/ui/button";
 import { project } from "@/lib/config";
 import { space_grotesk } from "@/lib/fonts";
 import Link from "next/link";
 import React from "react";
+import SignIn from "./auth/sign-in-button";
 
 const Navbar = () => {
   return (
@@ -17,12 +17,8 @@ const Navbar = () => {
           {project.name.smallCase}
         </Link>
         <div className="flex items-center space-x-2">
-          <Link href={project.links.github} target="_blank">
-            <Button variant={"link"} className="font-semibold">
-              Contribute
-            </Button>
-          </Link>
           <DynamicThemeChanger />
+          <SignIn />
         </div>
       </nav>
     </header>
