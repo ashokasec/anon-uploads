@@ -1,4 +1,4 @@
-import { S3Client, PutObjectCommand, ListObjectsV2Command } from '@aws-sdk/client-s3';
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
 import { env } from '@/lib/env';
 import Chance from "chance"
@@ -40,16 +40,3 @@ export const getPutObjectPreSignedUrl = async (contentType: string) => {
         throw error;
     }
 }
-
-export const listAllObjectsByBucketNameUseCase = async (bucketName: string) => {
-    try {
-        const command = new ListObjectsV2Command({
-            Bucket: bucketName,
-        });
-        const result = await s3Client.send(command);
-        return result.Contents; // Contains the list of objects
-    } catch (error) {
-        console.error("Error fetching objects:", error);
-        throw error;
-    }
-};

@@ -1,14 +1,16 @@
 "use server";
 
-import { auth } from "@/server/auth";
+import { authenticatedAction } from "@/server/procedures/auth";
 import {
-  getPutObjectPreSignedUrlUseCase,
-  listAllImagesInLast24hrsUseCase,
-} from "@/server/use-case/image-operations";
+  getImagesFrom24HrsUseCase,
+  insertNewImageUseCase,
+} from "@/server/use-case/image";
+import { getPutObjectPreSignedUrlUseCase } from "@/server/use-case/image-operations";
 import { z } from "zod";
 import { createServerAction } from "zsa";
 
-export const getPutObjectPreSignedUrlAction = createServerAction()
+export const getPutObjectPreSignedUrlAction = authenticatedAction
+  .createServerAction()
   .input(
     z.object({
       filename: z.string(),
@@ -17,19 +19,25 @@ export const getPutObjectPreSignedUrlAction = createServerAction()
     })
   )
   .handler(async ({ input }) => {
-    // TODO: Create a zsa procedure to authenticate a user.
-    const session = await auth();
-    if (!session) {
-      return;
-    }
     const { key, url } = await getPutObjectPreSignedUrlUseCase(
       input.contentType
     );
     return { filename: key, uploadUrl: url };
   });
 
-export const listAllImagesOfLast24hrsAction = createServerAction().handler(
+export const getImagesFrom24HrsAction = createServerAction().handler(
   async () => {
-    return listAllImagesInLast24hrsUseCase();
+    return getImagesFrom24HrsUseCase();
   }
 );
+
+export const insertNewImageAction = authenticatedAction
+  .createServerAction()
+  .input(
+    z.object({
+      objectKey: z.string(),
+    })
+  )
+  .handler(async ({ input }) => {
+    await insertNewImageUseCase(input.objectKey);
+  });

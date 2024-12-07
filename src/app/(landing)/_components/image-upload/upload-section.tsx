@@ -3,8 +3,12 @@
 import { useState, ChangeEvent } from "react";
 import { Upload } from "lucide-react";
 import { useServerAction } from "zsa-react";
-import { getPutObjectPreSignedUrlAction } from "../../action";
+import {
+  getPutObjectPreSignedUrlAction,
+  insertNewImageAction,
+} from "../../action";
 import imageCompression from "browser-image-compression";
+import axios from "axios";
 
 function validateFile(file: File) {
   const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/gif"];
@@ -28,6 +32,9 @@ export default function UploadSection() {
   const [error, setError] = useState<string | null>(null);
   const [uploading, setUploading] = useState<boolean>(false);
 
+  const { execute: insertNewImageExecute } =
+    useServerAction(insertNewImageAction);
+
   const {
     execute,
     error: gPOPSUerror,
@@ -46,19 +53,27 @@ export default function UploadSection() {
 
       if (!data) return;
 
-      const uploadResponse = await fetch(data?.uploadUrl, {
-        method: "PUT",
-        body: file,
-        headers: {
-          "Content-Type": file.type,
-        },
-      });
+      try {
+        // Perform the PUT request using Axios
+        const uploadResponse = await axios.put(data.uploadUrl, file, {
+          headers: {
+            "Content-Type": file.type,
+          },
+        });
 
-      if (!uploadResponse.ok) {
-        throw new Error("Failed to upload the file.");
+        // Check for a successful response (status in 2xx range)
+        if (uploadResponse.status < 200 || uploadResponse.status >= 300) {
+          throw new Error("Failed to upload the file.");
+        }
+
+        // Perform additional actions after a successful upload
+        await insertNewImageExecute({ objectKey: data.filename });
+
+        alert("File uploaded successfully!");
+      } catch (error) {
+        console.error("Error uploading file:", error);
+        setError("Failed to upload the file.");
       }
-
-      alert("File uploaded successfully!");
     },
   });
 

@@ -6,13 +6,13 @@ import React from "react";
 const HeroInfo = () => {
   return (
     <section>
-      <div className="mt-4 text-[15px] md:text-base text-gray-600 dark:text-gray-300">
+      <div className="mt-4 text-sm md:text-[15px] md:leading-normal text-gray-600 dark:text-gray-300">
         <h1
           style={space_grotesk.style}
-          className="text-base md:text-lg leading-tight  font-semibold text-black dark:text-gray-50 mb-2"
+          className="text-[15px] md:text-base leading-normal font-semibold text-black dark:text-gray-50 mb-2"
         >
-          Upload anything. Watch it live for 24 hours. Then? It&apos;s gone—no logs,
-          no trace, no questions asked.
+          Upload anything. Watch it live for 24 hours. Then? It&apos;s gone—no
+          logs, no trace, no questions asked.
         </h1>
         <h2 className="inline">
           I don&apos;t care who you are or where you&apos;re from. Just upload
@@ -27,7 +27,7 @@ const HeroInfo = () => {
         <span className="flex flex-col md:flex-row md:items-end my-2 md:space-x-2">
           <span
             style={space_grotesk.style}
-            className="text-base md:text-lg leading-tight  font-semibold text-black dark:text-gray-50"
+            className="text-[15px] md:text-base leading-normal font-semibold text-black dark:text-gray-50"
           >
             I don&apos;t wanted to end up in prison for your stupidity.
           </span>
@@ -35,13 +35,13 @@ const HeroInfo = () => {
             ~ that good boy
           </span>
         </span>
-        <p className="text-[15px] md:text-base ">
+        <p className="text-sm md:text-[15px] md:leading-normal">
           The rest? Do whatever you want. Flowers, demons, lizards or that too
           😋 — I don&apos;t care.
         </p>
         <br />
-        <p className="text-[15px] md:text-base">
-          do you have any questions like,{" "}
+        <p className="text-sm md:text-[15px] md:leading-normal">
+          Do you have any questions like,{" "}
           <Link
             href="/why-i-created-anon-uploads"
             className="underline text-gray-800 dark:text-gray-50 font-medium"

@@ -2,7 +2,7 @@
 
 import React, { Suspense, useEffect, useState } from "react";
 import ImageCard from "./image-card";
-import { listAllImagesOfLast24hrsAction } from "../../action";
+import { getImagesFrom24HrsAction } from "../../action";
 import { useServerAction } from "zsa-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useSearchParams } from "next/navigation";
@@ -106,7 +106,7 @@ const GalleryGrid = () => {
     error,
     isPending,
     isSuccess,
-  } = useServerAction(listAllImagesOfLast24hrsAction);
+  } = useServerAction(getImagesFrom24HrsAction);
 
   useEffect(() => {
     execute();
