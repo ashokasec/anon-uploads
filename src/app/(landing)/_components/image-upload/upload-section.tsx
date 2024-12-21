@@ -10,6 +10,7 @@ import {
 import imageCompression from "browser-image-compression";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 function validateFile(file: File) {
   const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/gif"];
@@ -70,7 +71,8 @@ export default function UploadSection() {
         // Perform additional actions after a successful upload
         await insertNewImageExecute({ objectKey: data.filename });
 
-        alert("File uploaded successfully!");
+        // alert("File uploaded successfully!");
+        toast("File uploaded successfully!")
       } catch (error) {
         console.error("Error uploading file:", error);
         setError("Failed to upload the file.");
