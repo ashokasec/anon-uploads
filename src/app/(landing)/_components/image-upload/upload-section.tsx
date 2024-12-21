@@ -9,6 +9,7 @@ import {
 } from "../../action";
 import imageCompression from "browser-image-compression";
 import axios from "axios";
+import { Button } from "@/components/ui/button";
 
 function validateFile(file: File) {
   const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/gif"];
@@ -145,57 +146,60 @@ export default function UploadSection() {
         id="imageUpload"
         disabled={uploading}
       />
-      <label
-        htmlFor="imageUpload"
-        className="flex flex-col items-center justify-center w-full h-fit border-2 border-gray-600 border-dashed rounded-lg cursor-pointer transition-all duration-300 group-hover:border-blue-500"
-      >
-        {preview ? (
-          <img
-            src={preview}
-            alt="Preview"
-            className="object-cover w-full h-full rounded-lg"
-          />
-        ) : (
-          <div className="flex flex-col items-center justify-center py-6">
-            <Upload className="w-6 h-6 mb-3 text-gray-400 transition-colors duration-300 group-hover:text-blue-500" />
-            <p className="mb-2 text-sm text-gray-400 transition-colors duration-300 group-hover:text-blue-500">
-              <span className="font-semibold">Click to upload</span> or drag and
-              drop
-            </p>
-            <p className="text-xs text-gray-500">
-              SVG, PNG, JPG or GIF (MAX. 2.5MB)
-            </p>
+      <div className={`grid ${preview && "grid-cols-2 gap-x-4"}`}>
+        <label
+          htmlFor="imageUpload"
+          className="flex flex-col items-center justify-center w-full h-fit border-2 border-gray-600 border-dashed rounded-lg cursor-pointer duration-300 group-hover:border-blue-500"
+        >
+          {preview ? (
+            <img
+              src={preview}
+              alt="Preview"
+              className="object-cover w-full h-full rounded-lg"
+            />
+          ) : (
+            <div className="flex flex-col items-center justify-center py-6">
+              <Upload className="w-6 h-6 mb-3 text-gray-400 transition-colors duration-300 group-hover:text-blue-500" />
+              <p className="mb-2 text-sm text-gray-400 transition-colors duration-300 group-hover:text-blue-500">
+                <span className="font-semibold">Click to upload</span> or drag
+                and drop
+              </p>
+              <p className="text-xs text-gray-500">
+                SVG, PNG, JPG or GIF (MAX. 2.5MB)
+              </p>
+            </div>
+          )}
+        </label>
+        {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
+        {preview && (
+          <div>
+            <div className="text-[15px] mt-1.5">Name: {file?.name}</div>
+            <div className="flex space-x-2 mt-4">
+              <Button
+                onClick={handleUpload}
+                disabled={uploading}
+                variant={"outline"}
+                className="bg-blue-600  border !border-blue-600 text-white hover:text-white hover:bg-blue-500"
+              >
+                {uploading ? "Uploading..." : "Upload Image"}
+              </Button>
+              <Button
+                onClick={() => {
+                  if (uploading) return;
+                  setPreview(null);
+                  setFile(null);
+                  setError(null);
+                }}
+                disabled={uploading}
+                variant={"destructive"}
+                className="bg-red-400/15 hover:bg-red-400/30 border text-red-500 !border-red-600"
+              >
+                Remove Image
+              </Button>
+            </div>
           </div>
         )}
-      </label>
-      {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
-      {preview && (
-        <>
-          <button
-            onClick={handleUpload}
-            disabled={uploading}
-            className={`w-full px-4 py-2 mt-4 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-colors duration-300 ${
-              uploading ? "cursor-not-allowed opacity-50" : ""
-            }`}
-          >
-            {uploading ? "Uploading..." : "Upload Image"}
-          </button>
-          <button
-            onClick={() => {
-              if (uploading) return;
-              setPreview(null);
-              setFile(null);
-              setError(null);
-            }}
-            disabled={uploading}
-            className={`w-full px-4 py-2 mt-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-colors duration-300 ${
-              uploading ? "cursor-not-allowed opacity-50" : ""
-            }`}
-          >
-            Remove Image
-          </button>
-        </>
-      )}
+      </div>
     </>
   );
 }

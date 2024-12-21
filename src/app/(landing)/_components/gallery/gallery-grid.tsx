@@ -33,11 +33,11 @@ const GalleryGridSkeleton = () => {
 };
 
 const FallbackMessage = () => (
-  <p className="text-gray-600 col-span-full flex flex-col border rounded-md items-center justify-center py-6 border-gray-300">
-    <span className="text-lg font-semibold text-black">
+  <p className="text-gray-600 col-span-full flex flex-col border rounded-md items-center justify-center py-6 border-gray-300 dark:border-border">
+    <span className="text-lg font-semibold text-black dark:text-gray-300">
       the anons have been silent for 24 hours
     </span>
-    <span className="text-xs italic font-medium text-gray-200">
+    <span className="text-xs font-medium text-gray-500 mt-1 dark:text-gray-600">
       no images uploaded in the last 24 hrs
     </span>
   </p>
